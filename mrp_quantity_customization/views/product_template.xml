@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="product_template_normal_website_form_view_ip" model="ir.ui.view">
+        <field name="name">product.template.normal.view.website</field>
+        <field name="model">product.template</field>
+        <field name="inherit_id" ref="product.product_template_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='group_lots_and_weight']" position="inside">
+                <field name="minimal_qty" />
+                <field name="main_compoment" />
+            </xpath>
+       </field>
+    </record>
+</odoo>

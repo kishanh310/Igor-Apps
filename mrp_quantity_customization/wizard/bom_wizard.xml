@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_bom_wizard_form" model="ir.ui.view">
+        <field name="name">bom.wizard.form</field>
+        <field name="model">bom.wizard</field>
+        <field name="arch" type="xml">
+            <form string="BoM Wizard">
+                <group>
+                    <field name="line_ids" nolabel="1">
+                        <list create="0" delete="0" editable="bottom">
+                            <field name="is_selected" nolabel="1" />
+                            <field name="product_id" readonly="1" force_save="1" />
+                            <field name="bom_id" readonly="1" force_save="1" />
+                        </list>
+                    </field>
+                </group>
+                <footer>
+                    <button string="Confirm" name="confirm_action" type="object" class="btn-primary" />
+                    <button string="Cancel" class="btn-secondary" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+</odoo>

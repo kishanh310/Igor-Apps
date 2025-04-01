@@ -8,6 +8,7 @@
             <xpath expr="//group[@name='group_lots_and_weight']" position="inside">
                 <field name="minimal_qty" />
                 <field name="main_compoment" />
+                <field name="supplier_code"  force_save="1"/>
             </xpath>
        </field>
     </record>

@@ -66,7 +66,7 @@ class MrpProduction(models.Model):
 class MrpBom(models.Model):
     _inherit = 'mrp.bom'
 
-    supplier_code = fields.Integer(string="Supplier Code")
+    supplier_code = fields.Integer(string="Supplier Code", copy=False)
 
     def update_supliier_code(self):
         main_component = self.bom_line_ids.filtered(lambda line: line.product_id.main_compoment)
@@ -76,8 +76,10 @@ class MrpBom(models.Model):
     
     def write(self, vals):
         res = super(MrpBom, self).write(vals)
-        for bom in self:
-            bom.update_supliier_code()
+        if 'bom_line_ids' in vals:
+            for bom in self:
+                bom.supplier_code = 0
+                bom.update_supliier_code()
         return res
 
     @api.model

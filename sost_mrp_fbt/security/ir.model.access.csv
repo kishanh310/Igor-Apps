@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+sost_mrp_fbt.access_bom_wizard,access_bom_wizard,sost_mrp_fbt.model_bom_wizard,base.group_user,1,1,1,1
+sost_mrp_fbt.access_bom_wizard_line,access_bom_wizard_line,sost_mrp_fbt.model_bom_wizard_line,base.group_user,1,1,1,1

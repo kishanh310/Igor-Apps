@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 {
-	'name': "Mrp Quality",
-	
-	'category': 'Mrp Quality',
+	'name': "MRP Quantities and Suppliers",
+	'category': 'MRP Quantities and Suppliers',
 	'version': '18.0.1.0.0',
 	'depends': ['mrp', 'product'],
 	'data': [

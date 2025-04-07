@@ -29,5 +29,8 @@ class ResPartner(models.Model):
         if 'parent_id' in vals:
             parent = self.browse(vals['parent_id'])
             vals['supplier_code'] = parent.supplier_code
+        if 'supplier_code' in vals:
+            for child_id in self.child_ids:
+                child_id.supplier_code = vals['supplier_code']
         return super().write(vals)
  

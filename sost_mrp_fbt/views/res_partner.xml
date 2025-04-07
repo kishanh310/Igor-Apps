@@ -6,8 +6,8 @@
         <field name="inherit_id" ref="base.view_partner_form" />
         <field name="arch" type="xml">
             <xpath expr="//group[@name='purchase']" position="inside">
-                <field name="is_supplier_code" />
-                <field name="supplier_code" readonly="is_supplier_code ==  True" />
+                <field name="is_supplier_code" invisible="1"/>
+                <field name="supplier_code" />
             </xpath>
         </field>
     </record>

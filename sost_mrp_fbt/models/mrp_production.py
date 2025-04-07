@@ -16,7 +16,27 @@ class MrpProduction(models.Model):
         for bom_id in bom_ids:
             for component in bom_id.bom_line_ids:
                 if component.product_id.main_compoment:
-                   bom_dict.update({bom_id.id: component.product_id.id})
+                   bom_dict.update({bom_id.id: [component.product_id.id, component.product_uom_id.id]})
+
+        line_list = []
+        for bom, product in bom_dict.items():
+            product_uom = product[1]
+            product = product[0]
+            product_dict ={'product_id': product, 'bom_id': bom, 'product_uom': product_uom}
+            warehouse_ids = self.env['stock.warehouse'].search([('show_in_mrp', '=', True)])
+            for warehouse_id in warehouse_ids:
+                product_id = self.env['product.product'].browse(product).with_context(warehouse_id=warehouse_id.id)
+                for suffix in ['onhand_qty', 'free_qty']:
+                    warehouse_code = warehouse_id.code.replace(' ', '_')
+                    field_name = f"x_{warehouse_code.lower()}_{suffix}"
+                    product_qty = 10
+                    if suffix == 'onhand_qty':
+                       product_qty =  product_id.qty_available
+                    else:
+                       product_qty =  product_id.free_qty
+
+                    product_dict.update({field_name: product_qty})
+            line_list.append((0, 0, product_dict))
 
         return {
             'type': 'ir.actions.act_window',
@@ -26,7 +46,7 @@ class MrpProduction(models.Model):
             'target': 'new',
             'context': {
                 'default_mrp_id': self.id,
-                'default_line_ids': [(0, 0, {'product_id': product, 'bom_id': bom}) for bom, product in bom_dict.items()],
+                'default_line_ids': line_list,
             },
         }
 

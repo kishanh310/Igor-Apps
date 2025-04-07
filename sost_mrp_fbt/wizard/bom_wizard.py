@@ -2,6 +2,7 @@ from odoo import models, fields, api
 from odoo.exceptions import ValidationError
 
 
+
 class BomWizard(models.TransientModel):
     _name = "bom.wizard"
     _description = "BoM Wizard"
@@ -24,6 +25,5 @@ class BomWizardLine(models.TransientModel):
     wizard_id = fields.Many2one("bom.wizard", string="Wizard")
     product_id = fields.Many2one("product.product", string="Product")
     bom_id = fields.Many2one("mrp.bom", string="BOM")
-    is_selected = fields.Boolean(string="Select") 
-
-
+    is_selected = fields.Boolean(string="Select")
+    product_uom = fields.Many2one(comodel_name='uom.uom', string="Unit of Measure", readonly=True)

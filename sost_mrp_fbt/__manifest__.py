@@ -9,6 +9,7 @@
 		'views/product_template.xml',
 		'views/mrp_production_views.xml',
 		'views/res_partner.xml',
+		'views/stock_warehouse.xml',
 		'wizard/bom_wizard.xml',
 	],
 	'license': 'LGPL-3',

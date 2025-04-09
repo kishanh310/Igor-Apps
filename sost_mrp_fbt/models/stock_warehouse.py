@@ -23,8 +23,10 @@ class ResPartner(models.Model):
                     ('model', '=', 'bom.wizard.line'),
                 ], limit=1)
                 if not existing_field:
+                    label_suffix = 'Onhand' if suffix == 'onhand_qty' else 'Free'
+                    field_description = f"{warehouse_id.code}/" + label_suffix
                     warehouse_field = self.env['ir.model.fields'].sudo().create({'name': field_name.lower(),
-                                                                                 'field_description': field_name[2:].replace('_', ' ').title(),
+                                                                                 'field_description': field_description,
                                                                                  'model_id': self.env.ref('sost_mrp_fbt.model_bom_wizard_line').id,
                                                                                  'ttype': 'integer',
                                                                                  })

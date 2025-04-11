@@ -74,6 +74,7 @@ class MrpProduction(models.Model):
                 main_qty = 1 if qty_min > 0 else 0
                 mo_qty = qty_trunk + main_qty
                 product_qty = mo_qty * minimal_qty
+                product_qty = float(int(product_qty) + (1 if product_qty - int(product_qty) >= 0.5 else 0))
 
                 mo_qty = product_uom_qty / self.product_qty
                 mo_main_qty =  math.trunc(product_qty / mo_qty)

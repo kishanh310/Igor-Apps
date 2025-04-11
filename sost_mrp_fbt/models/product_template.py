@@ -11,7 +11,7 @@ class ProductTemplate(models.Model):
         return  [('new', 'new')] + selection_list
 
     supplier_code = fields.Selection(selection=lambda self: self._get_supplier_code(), string="Supplier Code", default='new')
-    minimal_qty = fields.Integer('Minimal Qty', default=1)
+    minimal_qty = fields.Float('Minimal Qty', default=1.0, digits=(16, 4))
     main_compoment = fields.Boolean()
 
     def write(self,vals):
@@ -30,9 +30,10 @@ class ProductProduct(models.Model):
 
 
     supplier_code = fields.Selection(selection=lambda self: self.product_tmpl_id._get_supplier_code(), string="Supplier Code")
-    minimal_qty = fields.Integer(
+    minimal_qty = fields.Float(
         string="Minimal Qty",
-        copy=True
+        copy=True,
+        digits=(16, 4)
     )
     main_compoment = fields.Boolean(copy=True)
 
